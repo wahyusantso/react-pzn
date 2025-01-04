@@ -1,23 +1,26 @@
 export default function HelloWorld() {
+    // use spread on props
+    const props = {
+        text: "Hello, react.!! let's go to the moon"
+    }
     return (
         <>
-            <HeaderHelloWord/>
+            <HeaderHelloWord {...props}/> {/* assign props */}
             <ParagrafHelloWord/>
         </>
     );
 }
 
-function HeaderHelloWord() {
-    const text = 'world!';
+function HeaderHelloWord({ text = "forget to give text" }) { // destructuring props, execute if forget assign props.
     return (
         <h1 style={{ 
             color: 'blue',
             backgroundColor: 'tomato'
-         }}>Hello, {text}</h1>
+         }}>Hello, {text.toUpperCase()}</h1>
     )
 }
 
-function ParagrafHelloWord() { 
+function ParagrafHelloWord() {
     const content = 'Build Web React JS, Tutorial from PZN';
     const style = {
         color: 'red',
