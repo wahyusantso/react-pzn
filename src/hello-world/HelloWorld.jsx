@@ -1,3 +1,5 @@
+import "./HelloWorld.css";
+
 export default function HelloWorld() {
     // use spread on props
     const props = {
@@ -13,20 +15,13 @@ export default function HelloWorld() {
 
 function HeaderHelloWord({ text = "forget to give text" }) { // destructuring props, execute if forget assign props.
     return (
-        <h1 style={{ 
-            color: 'blue',
-            backgroundColor: 'tomato'
-         }}>Hello, {text.toUpperCase()}</h1>
+        <h1 className="title">Hello, {text.toUpperCase()}</h1>
     )
 }
 
 function ParagrafHelloWord() {
     const content = 'Build Web React JS, Tutorial from PZN';
-    const style = {
-        color: 'red',
-        backgroundColor: 'aqua'
-    }
     return (
-        <p style={style}>{content.toLowerCase()}</p>
+        <p className="content">{content.toLowerCase()}</p>
     )
  }
