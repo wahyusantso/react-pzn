@@ -4,7 +4,8 @@ export default function Todo({text, isCompleted, isDeleted = false}) {
     } else {
         return (
             <li>
-                {text} {isCompleted && '✅'} 
+            {/* tampilkan icon jika isCompleted true. */}
+                {text} {isCompleted && '✅'}
             </li>
         )
     }
