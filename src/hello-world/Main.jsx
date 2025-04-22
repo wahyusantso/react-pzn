@@ -3,6 +3,7 @@ import HelloWorld from "./HelloWorld";
 import { StrictMode } from "react";
 import Container from "./Container";
 import Todolist from "../todolist/Todolist";
+import Table from "../table/Table";
 
 createRoot(document.getElementById("root"))
     .render(
@@ -11,6 +12,7 @@ createRoot(document.getElementById("root"))
             {/* nested component */}
                 <HelloWorld />
                 <Todolist />
+                <Table />
             </Container>
         </StrictMode>
     );
