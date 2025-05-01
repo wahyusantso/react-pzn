@@ -6,6 +6,8 @@ import Todolist from "../todolist/Todolist";
 import Table from "../table/Table";
 import AlertButton from "../button/AlertButton";
 import MyButton from "../button/MyButton";
+import Toolbar from "../button/Toolbar";
+import SearchForm from "../form/SearchForm";
 
 createRoot(document.getElementById("root"))
     .render(
@@ -18,6 +20,11 @@ createRoot(document.getElementById("root"))
                 
                 <AlertButton text={'Focus On Me!'} message={'You Click Me!'}/>
                 <MyButton text={'Smash me'} onSmash={() => alert('You Smash Smash Me!')}/>
+                <Toolbar onClick={(e) => {
+                    e.stopPropagation(); //handle double events because the parent has the same event
+                    alert('smart people!');
+                }}/>
+                <SearchForm/>
             </Container>
         </StrictMode>
     );
