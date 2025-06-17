@@ -5,7 +5,7 @@ export default function Counter() {
     let [counter, setCounter] = useState(0);
     
     function handleClick() {
-        setCounter(counter + 1);
+        setCounter(counter + 1); //ketika ada perubahan state react akan mengirim antrian untuk memicu render ulang. itu sebabnya perlu menggunakan useState menyimpan data sebelumnya.
         console.log(counter);
     }
 
