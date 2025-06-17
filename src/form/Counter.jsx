@@ -6,6 +6,13 @@ export default function Counter() {
     
     function handleClick() {
         setCounter(counter + 1); //ketika ada perubahan state react akan mengirim antrian untuk memicu render ulang. itu sebabnya perlu menggunakan useState menyimpan data sebelumnya.
+        
+        /*
+        dalam case snapshot(variabel dalam state), data tidak akan berubah karena state hanya memicu untuk dirender ulang, data baru akan berubah jika render terjadi.
+        ketika membuat setCounter sebanyak 3x, bukan berarti react akan render sebanyak 3x, melainkan setCounter terakhir yang akan dirender, ini terjadi karena react menunggu event handler sampai selesai
+        **/
+       setCounter(counter + 1);
+       setCounter(counter + 1);
         console.log(counter);
     }
 
