@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { useImmer } from "use-immer";
+import TaskForm from "./TaskForm";
+import TaskList from "./TaskList";
 
 /* penggunaan useImmer pada array, dengan ketentuan membuat array baru setiap melakukan perubahan */
 
@@ -11,7 +13,7 @@ export default function Task() {
         setItem(e.target.value);
     }
 
-    function handleClick(e) {
+    function handleOnSubmit(e) {
         e.preventDefault();
 
         setItems((draft) => {
@@ -23,17 +25,22 @@ export default function Task() {
 
     return (
         <div>
-            <h1>Create Task</h1>
+            {/* <h1>Create Task</h1>
             <form>
                 <input value={item} onChange={handleChange}/>
-                <button onClick={handleClick}>Add</button>
+                <button onClick={handleOnSubmit}>Add</button>
             </form>
             <h1>List Task</h1>
             <ul>
                 {items.map((item, index) => 
                     <li key={index}>{item}</li>
                 )}
-            </ul>
+            </ul> */}
+
+            {/* sharing state */}
+            <TaskForm  setItems={setItems}/>
+            <TaskList items={items}/>
         </div>
+
     )
 }
