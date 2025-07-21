@@ -2,6 +2,7 @@ import { useImmer, useImmerReducer } from "use-immer";
 import NoteForm from "./NoteForm";
 import NoteList from "./NoteList";
 import { useReducer } from "react";
+import { NoteContext, NoteDispatchContext } from "./NoteContext";
 
 let id = 0;
 
@@ -36,57 +37,19 @@ export default function NoteApp() {
     // const [notes, dispatch] = useReducer(notesReducer, initialNotes); //use Reducer. return reducer bukan set function melainkan action function(dispatch).
     const [notes, dispatch] = useImmerReducer(notesReducer, initialNotes);
 
-    function handleAddNote(text) {
-        /* Without Reducer
-        setNotes((draft) => {
-            draft.push({
-                id: id++,
-                text: text,
-                done: false
-            });
-        });
-        **/
+    //notes dan dispatch dihandle oleh context(), jadi tidak perlu kirim props lagi.
+    //proses handlechange, addnote, handledelete, dilakukan di child component dengan menggunakan Reducer yang sudah diintegrasikan dengan context().
+    //mengirim state dan reducer menggunakan context() yang sebelumnya menggunakan props.
 
-        //object action yang dikirim ke reducer
-        dispatch({
-            type: "ADD_NOTE",
-            text: text
-        });
-    }
-
-    function handleChangeNote(note) {
-        /* Without Reducer
-        setNotes((draft) => {
-            const index = draft.findIndex(item => item.id === note.id); //cari index note yang ingin diupdate.
-            draft[index] = note;
-        });
-        **/
-
-        dispatch({
-            ...note,
-            type: "CHANGE_NOTE"
-        });
-    }
-
-    function handleDeleteNote(note) {
-        /* Without Reducer
-        setNotes((draft) => {
-            const index = draft.findIndex(item => item.id === note.id); //cari index note yang ingin diupdate.
-            draft.splice(index, 1); //hapus berdasarkan indexnya dan jumlah data yang dihapus 1.
-        });
-        **/
-
-        dispatch({
-            type: "DELETE_NOTE",
-            id: note.id
-        });
-    }
-    
     return (
         <div>
-            <h1>Note App</h1>
-            <NoteForm onAddNote={handleAddNote}/>
-            <NoteList notes={notes} onChange={handleChangeNote} onDelete={handleDeleteNote}/>
+            <NoteContext.Provider value={notes}>
+                <NoteDispatchContext.Provider value={dispatch}>
+                    <h1>Note App</h1>
+                        <NoteForm/>
+                        <NoteList/>
+                    </NoteDispatchContext.Provider>
+            </NoteContext.Provider>
         </div>
     )
 }
