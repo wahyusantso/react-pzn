@@ -23,10 +23,15 @@ export default function ProductList() {
 
     //contoh penggunaan useEffet untuk mengambil data dari internet.
     useEffect(() => {
+        //jika ingin menerapkan async await pada effect, harus dibungkus didalam fungsi seperti dibawah ini. direkomendasikan menggunakan promise karena bisa langsung di terapkan di dalam  effect.
+        async function fetchProduct() {
+            const response = await fetch('/product.json') //simulasi menggunakan file json.
+            const data = await response.json(); //parse json ke objek javascript.
+            setProducts(data);
+        }
+
         if (load) { //melakukan pengecekan untuk menghindari infinite loop.
-            fetch('/product.json') //simulasi menggunakan file json.
-                .then((response) => response.json())
-                .then((data) => setProducts(data)) //ini akan memicu render ulang dan mengakibatkan infinite loop, jadi perlu ditambahkan pengecekan.
+            fetchProduct();
         }
 
         return () => { //clean up akan dijalankan saat akan terjadi render ulang ataupun terdapat effect lain yang akan jalan.
