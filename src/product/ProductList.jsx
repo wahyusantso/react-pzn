@@ -7,6 +7,8 @@ import Product from "./Product";
 - gunakan clean up, jika membutuhkan kode untuk dijalankan setelah effect. misalkan menutup koneksi socket.
 - gunakan effect dependencies, untuk membuat effect hanya berjalan ketika state berubah, dependencies dapat di isi array state.
 - gunakan empty array pada dependencies, untuk membuat effect hanya jalan sekali.
+- jangan gunakan effect untuk perubahan data diserver(kecuali hanya mengambil data), dikarena effect dapat dieksekusi berkali-kali setiap render ulang yang akan menyebabkan perubahan data terus terjadi di server.
+- disarankan menggunakan event handler(side effect) untuk menlakukan perubahan data di server, bukan useEffect().
 */
 export default function ProductList() {
     const [products, setProducts] = useState([]);
